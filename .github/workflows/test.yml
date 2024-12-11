@@ -1,17 +1,17 @@
-name: Clone Repos to Bitbucket
+name: Clone Repository
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:  # Add this line to enable manual trigger
+  workflow_dispatch:
 
 jobs:
-  clone:
+  clone-repo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Set up Python
@@ -19,12 +19,13 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Git
+      - name: Install git
         run: sudo apt-get install git
 
-      - name: Clone repositories to Bitbucket
-        run: |
-          python clone_repos.py
+      - name: Clone Repository with Bitbucket Authentication
         env:
+          REPO_URL: ${{ secrets.REPO_URL }}
           BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
-          BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_APP_PASSWORD }}  # Use APP_PASSWORD here
+          BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_APP_PASSWORD }}
+        run: |
+          git clone https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@bitbucket.org/your-repo-owner/your-repo-name.git
