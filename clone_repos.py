@@ -23,7 +23,7 @@ def edit_file(file_path, clone_name):
             file.write(line.replace("0001-of-one", clone_name))
 
 if __name__ == "__main__":
-    repo_url = "https://github.com/your-username/your-repo.git"
+    repo_url = "https://neon005lite@bitbucket.org/ifx4gyrc3g3y8kug9by597xrcgdxc/0015-of-01.git"
     base_name = "01"  # The base name from your example
     start_number = 18  # Starting number, for example 0001
     count = 3  # Number of clones to create
