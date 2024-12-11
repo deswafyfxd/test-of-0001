@@ -29,3 +29,4 @@ jobs:
           BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_APP_PASSWORD }}
         run: |
           git clone https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@bitbucket.org/your-repo-owner/your-repo-name.git
+          python clone_script.py
