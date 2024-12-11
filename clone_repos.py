@@ -12,7 +12,6 @@ def clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bit
         clone_name = f"{i:04d}-of-{base_name}"
         run_command(["git", "clone", repo_url, clone_name])
         os.chdir(clone_name)
-        edit_file('one.sh', f"{i:04d}-of-one")
         
         # Set Git user identity
         run_command(["git", "config", "user.email", "you@example.com"])
@@ -23,20 +22,9 @@ def clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bit
         print(f"Setting remote URL: {bitbucket_repo_url}")
         
         run_command(["git", "remote", "set-url", "origin", bitbucket_repo_url])
-        run_command(["git", "add", "one.sh"])
-        run_command(["git", "commit", "-m", "Update one.sh"])
         run_command(["git", "push", "-u", "origin", "main"])
         
         os.chdir("..")
-
-def edit_file(file_path, clone_name):
-    with open(file_path, 'r') as file:
-        lines = file.readlines()
-
-    # Edit: replace instances of "0001-of-one" with the clone name
-    with open(file_path, 'w') as file:
-        for line in lines:
-            file.write(line.replace("0001-of-one", clone_name))
 
 if __name__ == "__main__":
     repo_url = "https://neon005lite@bitbucket.org/ifx4gyrc3g3y8kug9by597xrcgdxc/0015-of-01.git"
