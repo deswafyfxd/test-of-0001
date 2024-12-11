@@ -29,14 +29,13 @@ jobs:
           echo "REPO_URL=${{ secrets.REPO_URL }}"
           echo "CUSTOM_NAME=${{ secrets.CUSTOM_NAME }}"
 
-      - name: Build Repository URL
+      - name: Clone Repository with Bitbucket Authentication
         env:
+          REPO_URL: ${{ secrets.REPO_URL }}
           BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
           BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_APP_PASSWORD }}
-          REPO_URL: ${{ secrets.REPO_URL }}
           CUSTOM_NAME: ${{ secrets.CUSTOM_NAME }}
         run: |
           FULL_URL="https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@$REPO_URL"
           echo "Full URL: $FULL_URL"
           git clone $FULL_URL $CUSTOM_NAME
-          python clone_script.py
