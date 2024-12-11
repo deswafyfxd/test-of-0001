@@ -25,7 +25,7 @@ def edit_file(file_path, clone_name):
 if __name__ == "__main__":
     repo_url = "https://github.com/your-username/your-repo.git"
     base_name = "01"  # The base name from your example
-    start_number = 1  # Starting number, for example 0001
+    start_number = 18  # Starting number, for example 0001
     count = 3  # Number of clones to create
     bitbucket_username = os.getenv('BITBUCKET_USERNAME')
     bitbucket_password = os.getenv('BITBUCKET_APP_PASSWORD')  # Update to match GitHub secret name
