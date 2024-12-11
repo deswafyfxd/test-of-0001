@@ -1,19 +1,19 @@
 import os
 import subprocess
 
-def clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project):
+def clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project_name, bitbucket_project_key):
     for i in range(start_number, start_number + count):
-        clone_name = f"{i:04d}-of-{base_name}"  # Changed to keep '-of-01' constant
+        clone_name = f"{i:04d}-of-{base_name}"
         subprocess.run(["git", "clone", repo_url, clone_name])
         os.chdir(clone_name)
-        edit_file('one.sh', f"{i:04d}-of-one")  # Edit the file after cloning to reflect 0001-of-one pattern
+        edit_file('one.sh', f"{i:04d}-of-one")
         
         # Set Git user identity
         subprocess.run(["git", "config", "user.email", "you@example.com"])
         subprocess.run(["git", "config", "user.name", "Your Name"])
         
-        # Update remote URL for Bitbucket
-        bitbucket_repo_url = f"https://{bitbucket_username}:{bitbucket_password}@bitbucket.org/{bitbucket_project}/{clone_name}.git"
+        # Construct Bitbucket repository URL
+        bitbucket_repo_url = f"https://{bitbucket_username}:{bitbucket_password}@bitbucket.org/{bitbucket_project_name}/{clone_name}.git"
         subprocess.run(["git", "remote", "set-url", "origin", bitbucket_repo_url])
         
         subprocess.run(["git", "add", "one.sh"])
@@ -32,10 +32,11 @@ def edit_file(file_path, clone_name):
 
 if __name__ == "__main__":
     repo_url = "https://neon005lite@bitbucket.org/ifx4gyrc3g3y8kug9by597xrcgdxc/0015-of-01.git"
-    base_name = "01"  # The base name from your example
-    start_number = 18  # Starting number, for example 0001
+    base_name = "01"
+    start_number = 18
     count = 3  # Number of clones to create
     bitbucket_username = os.getenv('BITBUCKET_USERNAME')
-    bitbucket_password = os.getenv('BITBUCKET_APP_PASSWORD')  # Update to match GitHub secret name
-    bitbucket_project = "bashiawsmsr3gyt4buu6gry1fgd5c3tg0v6t9"  # Replace with your Bitbucket project name
-    clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project)
+    bitbucket_password = os.getenv('BITBUCKET_APP_PASSWORD')
+    bitbucket_project_name = "bashiawsmsr3gyt4buu6gry1fgd5c3tg0v6t9"
+    bitbucket_project_key = "BASHAWSMSR"
+    clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project_name, bitbucket_project_key)
