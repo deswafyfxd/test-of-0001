@@ -1,0 +1,30 @@
+name: Clone Repos to Bitbucket
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Add this line to enable manual trigger
+
+jobs:
+  clone:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Git
+        run: sudo apt-get install git
+
+      - name: Clone repositories to Bitbucket
+        run: |
+          python clone_repos.py
+        env:
+          BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
+          BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_APP_PASSWORD }}  # Use APP_PASSWORD here
