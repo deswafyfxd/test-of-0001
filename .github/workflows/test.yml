@@ -25,6 +25,7 @@ jobs:
       - name: Debug - Check Environment Variables
         run: |
           echo "BITBUCKET_USERNAME=${{ secrets.BITBUCKET_USERNAME }}"
+          echo "BITBUCKET_APP_PASSWORD=${{ secrets.BITBUCKET_APP_PASSWORD }}"
           echo "REPO_URL=${{ secrets.REPO_URL }}"
 
       - name: Clone Repository with Bitbucket Authentication
@@ -33,6 +34,6 @@ jobs:
           BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
           BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_APP_PASSWORD }}
         run: |
-          echo "Cloning repository: $REPO_URL"
-          git clone https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@$REPO_URL
+          echo "Cloning repository: https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@bitbucket.org/ifx4gyrc3g3y8kug9by597xrcgdxc/0015-of-01.git"
+          git clone https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@bitbucket.org/ifx4gyrc3g3y8kug9by597xrcgdxc/0015-of-01.git
           python clone_script.py
