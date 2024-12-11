@@ -22,11 +22,17 @@ jobs:
       - name: Install git
         run: sudo apt-get install git
 
+      - name: Debug - Check Environment Variables
+        run: |
+          echo "BITBUCKET_USERNAME=${{ secrets.BITBUCKET_USERNAME }}"
+          echo "REPO_URL=${{ secrets.REPO_URL }}"
+
       - name: Clone Repository with Bitbucket Authentication
         env:
           REPO_URL: ${{ secrets.REPO_URL }}
           BITBUCKET_USERNAME: ${{ secrets.BITBUCKET_USERNAME }}
           BITBUCKET_APP_PASSWORD: ${{ secrets.BITBUCKET_APP_PASSWORD }}
         run: |
-          git clone https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@bitbucket.org/your-repo-owner/your-repo-name.git
+          echo "Cloning repository: $REPO_URL"
+          git clone https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@$REPO_URL
           python clone_script.py
