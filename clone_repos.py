@@ -33,5 +33,5 @@ if __name__ == "__main__":
     count = 3  # Number of clones to create
     bitbucket_username = os.getenv('BITBUCKET_USERNAME')
     bitbucket_password = os.getenv('BITBUCKET_APP_PASSWORD')
-    bitbucket_project_name = "bashiawsmsr3gyt4buu6gry1fgd5c3tg0v6t9"
+    bitbucket_project_name = "ifx4gyrc3g3y8kug9by597xrcgdxc"
     clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project_name)
