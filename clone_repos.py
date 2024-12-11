@@ -7,7 +7,7 @@ def run_command(command):
         print(f"Error running command {' '.join(command)}: {result.stderr}")
     return result
 
-def clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project_name):
+def clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_organization):
     for i in range(start_number, start_number + count):
         clone_name = f"{i:04d}-of-{base_name}"
         run_command(["git", "clone", repo_url, clone_name])
@@ -18,7 +18,7 @@ def clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bit
         run_command(["git", "config", "user.name", "Your Name"])
         
         # Construct Bitbucket repository URL
-        bitbucket_repo_url = f"https://{bitbucket_username}:{bitbucket_password}@bitbucket.org/{bitbucket_project_name}/{clone_name}.git"
+        bitbucket_repo_url = f"https://{bitbucket_username}:{bitbucket_password}@bitbucket.org/{bitbucket_organization}/{clone_name}.git"
         print(f"Setting remote URL: {bitbucket_repo_url}")
         
         run_command(["git", "remote", "set-url", "origin", bitbucket_repo_url])
@@ -33,5 +33,5 @@ if __name__ == "__main__":
     count = 3  # Number of clones to create
     bitbucket_username = os.getenv('BITBUCKET_USERNAME')
     bitbucket_password = os.getenv('BITBUCKET_APP_PASSWORD')
-    bitbucket_project_name = "ifx4gyrc3g3y8kug9by597xrcgdxc"
-    clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project_name)
+    bitbucket_organization = "ifx4gyrc3g3y8kug9by597xrcgdxc"
+    clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_organization)
