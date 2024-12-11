@@ -18,5 +18,8 @@ def clone_repo(repo_url):
         
 # Example usage
 if __name__ == "__main__":
-    repo_url = input("Enter the repository URL: ")
-    clone_repo(repo_url)
+    repo_url = os.environ.get('REPO_URL')
+    if repo_url:
+        clone_repo(repo_url)
+    else:
+        print("Repository URL not provided.")
