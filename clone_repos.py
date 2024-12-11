@@ -29,5 +29,5 @@ if __name__ == "__main__":
     count = 3  # Number of clones to create
     bitbucket_username = os.getenv('BITBUCKET_USERNAME')
     bitbucket_password = os.getenv('BITBUCKET_APP_PASSWORD')  # Update to match GitHub secret name
-    bitbucket_project = "your-bitbucket-project"  # Replace with your Bitbucket project name
+    bitbucket_project = "bashiawsmsr3gyt4buu6gry1fgd5c3tg0v6t9"  # Replace with your Bitbucket project name
     clone_repo(repo_url, base_name, start_number, count, bitbucket_username, bitbucket_password, bitbucket_project)
